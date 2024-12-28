@@ -13,13 +13,14 @@
 
     <script type="module" src="./JS/firebase.js"></script>
     <script type="module" src="./JS/fetchUser.js"></script>
+    <script type="module" src="./JS/index.js"></script>
   </head>
   <body>
     <!-- Navbar -->
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar scroll</a>
+          <a class="navbar-brand" href="#">E-Commerce</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -40,8 +41,17 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="./HTML/admin/productControl.html"
+                  >Control Product</a
+                >
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="./HTML/admin/categoryControl.html"
+                  >Control Categories</a
+                >
+              </li>
+
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -50,10 +60,14 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Link
+                  Action
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li>
+                    <a class="dropdown-item" id="btnShowProducts" href="#"
+                      >Show Products</a
+                    >
+                  </li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
@@ -66,13 +80,30 @@
               </li>
             </ul>
             <form class="d-flex" role="search">
-              <input
+              <!-- <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                id="textSearch"
+                name="textSearch"
+              /> -->
+
+              <!-- Handling Search Product -->
+              <input
+                list="productsFound"
+                id="textSearch"
+                name="textSearch"
+                class="form-control me-2"
+                aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <datalist id="productsFound"></datalist>
+
+              <button
+                id="btnSearch"
+                class="btn btn-outline-success"
+                type="submit"
+              >
                 Search
               </button>
             </form>
