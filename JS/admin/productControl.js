@@ -27,6 +27,7 @@ const productControl = document.forms["productControl"];
 // console.log(categoryControl);
 const productName = document.getElementById("productName");
 const imgFile = document.getElementById("imgFile");
+const imgPreview = document.getElementById("imgPreview");
 
 const btnSearch = document.getElementById("btnSearch");
 const productsFound = document.getElementById("productsFound");
@@ -114,16 +115,28 @@ function showRate(totalRate) {
   }
 }
 
+function handlingImagePreview() {
+  if (imgFile.value && imgFile.value != "") {
+    imgPreview.src = imgFile.value;
+    imgPreview.style = "display:block";
+  } else {
+    imgPreview.style = "display:none";
+  }
+}
+
+imgFile.onchange = function () {
+  handlingImagePreview();
+};
 /**************************************************************************/
 
 function deleteAllSelectChilds(select) {
-  while (select.firstChild) {
-    select.removeChild(select.firstChild);
+  for (let i = select.options.length - 1; i >= 0; i--) {
+    select.remove(i);
   }
 }
 
 function deleteAllOptionsExcept1(select, optionValue) {
-  for (let i = 0; i < select.options.length; i++) {
+  for (let i = select.options.length - 1; i >= 0; i--) {
     if (select.options[i].value == optionValue) {
       continue;
     } else {
@@ -134,7 +147,7 @@ function deleteAllOptionsExcept1(select, optionValue) {
 
 function validateProductName() {
   const productName = document.getElementById("productName");
-  let checkPattern = /^[a-zA-Z0-9]{1,}( [a-zA-Z0-9]{1,})*$/;
+  let checkPattern = /^[a-zA-Z0-9\']{1,}( [a-zA-Z0-9\']{1,})*$/;
   let productNameValue = productName.value;
   let productNameParent = productName.parentNode;
   if (checkPattern.test(productNameValue)) {
@@ -305,6 +318,7 @@ btnSearch.onclick = () => {
   let ProductNameValue = productName.value;
   if (validateProductName()) {
     deleteAllOptionsExcept1(productsFound, "0");
+    // deleteAllSelectChilds(productsFound);
     promiseSearchWithKeyAndValue("products", "name", ProductNameValue)
       .then((data) => {
         productsFound.disabled = false;
@@ -346,6 +360,7 @@ function customizeCategoryParent() {
   if (traceChanginghasParent()) {
     promiseGetAllTableData("categories")
       .then((data) => {
+        deleteAllSelectChilds(categoryParent);
         categoryParent.disabled = false;
         for (let id in data) {
           let dataValue = data[id];
@@ -382,6 +397,7 @@ function choosingCategoryParent(categoryParentId) {
     let notfound = true;
     promiseGetAllTableData("categories")
       .then((data) => {
+        deleteAllSelectChilds(categoryParent);
         categoryParent.disabled = false;
         for (let id in data) {
           let dataValue = data[id];
@@ -421,7 +437,6 @@ productsFound.onchange = () => {
       .then((data) => {
         productName.value = data.name;
         price.value = data.price;
-        console.log("Siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         console.log(data.quantity);
         quantity.value = data.quantity;
         console.log(quantity.value);
@@ -436,6 +451,7 @@ productsFound.onchange = () => {
         } else {
           imgFile.value = "";
         }
+        handlingImagePreview();
         if (data.category) {
           choosingCategoryParent(data.category);
           // categoryParent.value = data.categoryParent;

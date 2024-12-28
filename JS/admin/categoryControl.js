@@ -27,6 +27,7 @@ const categoryControl = document.forms["categoryControl"];
 // console.log(categoryControl);
 const categoryName = document.getElementById("categoryName");
 const imgFile = document.getElementById("imgFile");
+const imgPreview = document.getElementById("imgPreview");
 
 const btnSearch = document.getElementById("btnSearch");
 const categoriesFound = document.getElementById("categoriesFound");
@@ -50,7 +51,7 @@ function deleteAllSelectChilds(select) {
 }
 
 function deleteAllOptionsExcept1(select, optionValue) {
-  for (let i = 0; i < select.options.length; i++) {
+  for (let i = select.options.length - 1; i >= 0; i--) {
     if (select.options[i].value == optionValue) {
       continue;
     } else {
@@ -58,6 +59,19 @@ function deleteAllOptionsExcept1(select, optionValue) {
     }
   }
 }
+
+function handlingImagePreview() {
+  if (imgFile.value && imgFile.value != "") {
+    imgPreview.src = imgFile.value;
+    imgPreview.style = "display:block";
+  } else {
+    imgPreview.style = "display:none";
+  }
+}
+
+imgFile.onchange = function () {
+  handlingImagePreview();
+};
 
 function getCategoryFromForm() {
   if (validateCategoryName()) {
@@ -112,7 +126,7 @@ categoryControl.onsubmit = (e) => {
 
 function validateCategoryName() {
   const categoryName = document.getElementById("categoryName");
-  let checkPattern = /^[a-zA-Z0-9]{1,}( [a-zA-Z0-9]{1,})*$/;
+  let checkPattern = /^[a-zA-Z0-9\']{1,}( [a-zA-Z0-9\']{1,})*$/;
   let categoryNameValue = categoryName.value;
   let categoryNameParent = categoryName.parentNode;
   if (checkPattern.test(categoryNameValue)) {
@@ -238,6 +252,7 @@ function choosingCategoryParent(categoryParentId) {
     let notfound = true;
     promiseGetAllTableData("categories")
       .then((data) => {
+        deleteAllSelectChilds(categoryParent);
         categoryParent.disabled = false;
         for (let id in data) {
           let dataValue = data[id];
@@ -286,6 +301,7 @@ categoriesFound.onchange = () => {
         } else {
           imgFile.value = "";
         }
+        handlingImagePreview();
         if (data.categoryParent) {
           choosingCategoryParent(data.categoryParent);
           // categoryParent.value = data.categoryParent;
