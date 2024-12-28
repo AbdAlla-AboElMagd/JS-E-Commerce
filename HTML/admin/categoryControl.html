@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category Control</title>
+    <link
+      href="../../Resources/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="../../Resources/Bootstrap//bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./images/aIcon.jpeg" />
+    <script type="module" src="../../JS/adminAuthorization.js"></script>
+    <script type="module" src="../../JS/admin/categoryControl.js"></script>
+    <script type="module" src="../../JS/controlAlert.js"></script>
+  </head>
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="mt-5 col-lg-4 col-md-7 col-sm-9">
+      <div class="col-12">
+        <!-- <h1>Controling Category</h1> -->
+        <div id="msgResponse" style="display: none"></div>
+        <!-- Bootstrap Alert -->
+        <div
+          class="alert alert-dismissible fade show"
+          role="alert"
+          id="alertResponse"
+          style="display: none"
+        >
+          <strong id="strongAlertMsg"></strong>
+          <span id="normalAlertMsg"></span>
+          <button type="button" class="btn-close" id="alertCloseBtn"></button>
+        </div>
+        <!-- End of Bootstrap Alert -->
+        <div class="p-1 border-0 rounded-4 shadow-lg p-3 m-3 mb-3 mt-3">
+          <form
+            action=""
+            method="post"
+            name="categoryControl"
+            id="categoryControl"
+            novalidate
+          >
+            <div class="">
+              <fieldset>
+                <legend class="text-center m-1 fw-bold">
+                  Category Control
+                </legend>
+
+                <div class="input-group has-validation m-2">
+                  <label class="form-label w-100 fw-bold" for="categoryName"
+                    >Category Name:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="categoryName"
+                    name="name"
+                    tabindex="1"
+                    accesskey="n"
+                    placeholder="Category Name"
+                    required
+                  />
+
+                  <div class="invalid-feedback">
+                    Category name should be atleast has 1-Charectar
+                  </div>
+                </div>
+
+                <div>
+                  <input
+                    type="button"
+                    value="Search"
+                    id="btnSearch"
+                    class="w-100 btn btn-primary"
+                    disabled
+                  />
+                </div>
+                <div class="input-group has-validation m-2">
+                  <label for="categoriesFound" class="form-label w-100 fw-bold"
+                    >Categories Found:</label
+                  >
+                  <select
+                    name="categoriesFound"
+                    id="categoriesFound"
+                    class="form-control"
+                    disabled
+                  >
+                    <option value="0">Select Nothing</option>
+                  </select>
+                </div>
+
+                <label for="imgFile" class="form-label w-100 fw-bold"
+                  >Image:</label
+                >
+                <!-- <input
+                  type="file"
+                  class="form-control"
+                  name="imgFile"
+                  id="imgFile"
+                /> -->
+                <input
+                  type="url"
+                  name="imgFile"
+                  id="imgFile"
+                  class="form-control"
+                />
+                <div class="m-1 text-center">
+                  <p class="form-label fw-bold">Has Category Parent</p>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="yesCategoryParent"
+                      name="hasCategoryParent"
+                      value="true"
+                    />
+
+                    <label class="form-check-label" for="yesCategoryParent"
+                      >Yes</label
+                    >
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="noCategoryParent"
+                      name="hasCategoryParent"
+                      value="false"
+                      checked
+                    />
+                    <label class="form-check-label" for="noCategoryParent"
+                      >No</label
+                    >
+                  </div>
+                </div>
+
+                <div class="input-group has-validation m-2">
+                  <label for="categoryParent" class="form-label w-100 fw-bold"
+                    >Category Parent:</label
+                  >
+                  <select
+                    name="categoryParent"
+                    id="categoryParent"
+                    class="form-control"
+                    disabled
+                  ></select>
+                </div>
+
+                <label for="description" class="form-label w-100 fw-bold"
+                  >Description:</label
+                >
+                <textarea
+                  name="description"
+                  id="description"
+                  class="form-control"
+                ></textarea>
+
+                <div class="row mt-4">
+                  <input type="reset" class="btn btn-outline-danger mb-3" />
+                  <input
+                    type="button"
+                    value="Update"
+                    id="btnUpdate"
+                    class="w-100 btn btn-primary mb-2"
+                    disabled
+                  />
+
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    value="Create New"
+                  />
+                </div>
+
+                <div class="row mt-4">
+                  <!-- popup delete confirmation -->
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="w-100 btn btn-danger mb-2"
+                    id="btnDelete"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    disabled
+                  >
+                    Delete
+                  </button>
+
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="staticBackdrop"
+                    data-bs-backdrop="true"
+                    data-bs-keyboard="true"
+                    tabindex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                            Delete Confirmation
+                          </h1>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to delete this?
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            id="btnConfirmDelete"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End The Modal Code -->
+                </div>
+              </fieldset>
+            </div>
+            <div>
+              <p>
+                Already Created Category ?
+                <a href="./productControl.html">Control Product</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

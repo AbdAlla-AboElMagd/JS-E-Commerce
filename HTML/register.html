@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      href="../Resources/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="../Resources/Bootstrap//bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./images/aIcon.jpeg" />
+    <script type="module" src="../JS/loginRegisterAwait.js"></script>
+  </head>
+  <body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="mt-5 col-lg-4 col-md-7 col-sm-9">
+      <div class="col-12">
+        <!-- <h1>Creating New User</h1> -->
+        <div id="rResponse" style="display: none"></div>
+        <!-- Bootstrap Alert -->
+        <div
+          class="alert alert-dismissible fade show"
+          role="alert"
+          id="alertResponse"
+          style="display: none"
+        >
+          <strong id="strongAlertMsg"></strong>
+          <span id="normalAlertMsg"></span>
+          <!-- <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button> -->
+          <button type="button" class="btn-close" id="alertCloseBtn"></button>
+        </div>
+        <!-- End of Bootstrap Alert -->
+        <div class="p-1 border-0 rounded-4 shadow-lg p-3 m-3 mb-3 mt-3">
+          <form action="../Index.html" method="post" name="register" novalidate>
+            <div class="">
+              <fieldset>
+                <legend class="text-center m-1 fw-bold">Sign Up</legend>
+
+                <div class="input-group has-validation m-2">
+                  <label class="form-label w-100 fw-bold" for="userName"
+                    >Your Name:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    name="name"
+                    tabindex="1"
+                    accesskey="n"
+                    placeholder="First and Last Names"
+                    required
+                  />
+
+                  <div class="invalid-feedback">
+                    Name should be atleast 3-Charectars
+                  </div>
+                </div>
+
+                <div class="m-1 text-center">
+                  <p class="form-label fw-bold">Gender</p>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="male"
+                      name="gender"
+                      value="male"
+                      checked
+                    />
+
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                </div>
+
+                <div class="input-group has-validation m-2">
+                  <label for="email" class="form-label w-100 fw-bold"
+                    >Your Mail:</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    tapindex="2"
+                    accesskey="a"
+                    placeholder="Your Mail"
+                    required
+                  />
+
+                  <div class="invalid-feedback">
+                    Write a valid E-mail ex:a@a.com
+                  </div>
+                </div>
+
+                <div class="input-group has-validation m-2">
+                  <label for="pass" class="form-label w-100 fw-bold"
+                    >Password:</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="pass"
+                    id="pass"
+                    tabindex="3"
+                    accesskey="p"
+                    placeholder="Password"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Password must be at least 6 characters
+                  </div>
+                </div>
+
+                <div class="input-group has-validation m-2">
+                  <label for="confPass" class="form-label w-100 fw-bold"
+                    >Confirm Password:</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="confPass"
+                    id="confPass"
+                    tabindex="3"
+                    accesskey="p"
+                    placeholder="Confirm Password"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Password and Confirm Password must be the same
+                  </div>
+                </div>
+
+                <div class="m-1 text-center">
+                  <p class="form-label fw-bold">Rule</p>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="admin"
+                      name="isAdmin"
+                      value="1"
+                    />
+                    <label class="form-check-label" for="admin">Admin</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      type="radio"
+                      class="form-check-input"
+                      id="customer"
+                      name="isAdmin"
+                      value="0"
+                      checked
+                    />
+                    <label class="form-check-label" for="customer"
+                      >customer</label
+                    >
+                  </div>
+                </div>
+
+                <div class="row m-2">
+                  <input type="reset" class="btn btn-danger col-12" />
+                  <input
+                    type="submit"
+                    class="btn btn-success col-12 mb-3 mt-3"
+                    value="Submit"
+                  />
+                </div>
+              </fieldset>
+            </div>
+            <div>
+              <p>Already have acounct ? <a href="./login.html">Login</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="../JS/registerValidateBootstrap.js"></script>
+  </body>
+</html>
