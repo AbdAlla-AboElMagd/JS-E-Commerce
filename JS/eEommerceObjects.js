@@ -103,7 +103,8 @@ export function FullProductPlainObject(
   imageUrl = "",
   category = null,
   quantity = 0,
-  objectFeedback = {}
+  objectFeedback = {},
+  status = 0
 ) {
   return {
     id: id,
@@ -114,5 +115,50 @@ export function FullProductPlainObject(
     category: category,
     quantity: quantity,
     objectFeedback: objectFeedback,
+    status: status,
   };
+}
+
+export function CartPlainObject(userID, cart) {
+  let cartArray = [];
+  let order = {};
+  for (let product of cart) {
+    order = FullProductPlainObject(
+      product.id,
+      product.name,
+      product.price,
+      product.description,
+      product.imageUrl,
+      product.category,
+      product.quantity,
+      product.objectFeedback,
+      product.status
+    );
+    order["userID"] = userID;
+    cartArray.push(order);
+  }
+  return cartArray;
+}
+
+export function getStatus(statusNumber) {
+  switch (statusNumber) {
+    case 0:
+      return "Pending";
+      break;
+    case 1:
+      return "Approved";
+      break;
+    case 2:
+      return "Rejected";
+      break;
+    case 3:
+      return "Returned";
+      break;
+    case 4:
+      return "Shipped";
+      break;
+    default:
+      return "Unknown";
+      break;
+  }
 }

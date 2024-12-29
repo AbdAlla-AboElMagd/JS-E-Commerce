@@ -3,18 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link
       href="../Resources/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <script src="../Resources/Bootstrap//bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="../JS/showAllCategories.js"></script>
     <script type="module" src="../JS/fetchUser.js"></script>
     <script type="module" src="../JS/search.js"></script>
-    <title>Categories</title>
+    <title>Previous Orders</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+    <script type="module" src="../JS/showingPreviousOrder.js"></script>
   </head>
   <body>
-    <!--***********************************************************************************************************-->
     <!-- Navbar -->
     <div
       class="navbar navbar-expand-md navbar-dark bg-dark mb-4"
@@ -134,15 +150,23 @@
     </div>
 
     <!--************************************************************************************************************-->
-    <div
-      class=""
-      id="foundCategories"
-      style="
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-      "
-    ></div>
+
+    <h1>Your Previous Orders</h1>
+
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Take Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Orders will be injected here by JavaScript -->
+      </tbody>
+    </table>
   </body>
 </html>

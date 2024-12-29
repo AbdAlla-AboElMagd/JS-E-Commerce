@@ -12,6 +12,7 @@ import {
   FullProduct,
   FullProductPlainObject,
   Product,
+  CartPlainObject,
 } from "./eEommerceObjects.js";
 /********************************************/
 window.onload = function () {
@@ -36,18 +37,20 @@ btnBuy.onclick = function (e) {
   let products = [];
   const cart = JSON.parse(localStorage.getItem("cart"));
   const userId = localStorage.getItem("loggedInUserId");
-  let saveCart = { userId: cart };
-  promiseStoreObjectFirestore("cart", saveCart)
-    .then((id) => {
-      console.log(`Order Id: ${id}`);
-      console.log("Cart saved to Firestore");
-      localStorage.setItem("cart", []); // Clear cart
-      window.location.href = "../index.html";
-    })
-    .catch((e) => {
-      console.error("Error in Sending Order to the Server");
-      console.error(e);
-    });
+  let saveCart = CartPlainObject(userId, cart);
+  for (let cartItem of saveCart) {
+    promiseStoreObjectFirestore("cart", cartItem)
+      .then((id) => {
+        console.log(`Order Id: ${id}`);
+        console.log("Cart saved to Firestore");
+        localStorage.setItem("cart", []); // Clear cart
+        window.location.href = "../index.html";
+      })
+      .catch((e) => {
+        console.error("Error in Sending Order to the Server");
+        console.error(e);
+      });
+  }
 };
 
 /***************************************** */

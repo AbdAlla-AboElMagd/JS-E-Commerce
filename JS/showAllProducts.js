@@ -113,7 +113,8 @@ function createProductCard(
   rate,
   productID,
   category,
-  objectFeedback = null
+  objectFeedback = null,
+  status = 0
 ) {
   // Create the card containerconst
   let card = document.createElement("div");
@@ -182,7 +183,8 @@ function createProductCard(
     imageUrl,
     category,
     stockQuantity,
-    objectFeedback
+    objectFeedback,
+    status
   );
 
   button.onclick = function () {
