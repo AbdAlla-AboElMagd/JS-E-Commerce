@@ -60,7 +60,7 @@ if (registerForm) {
 
 function saveToDatabasae(user) {
   const auth = getAuth();
-  
+
   createUserWithEmailAndPassword(auth, user.email, user.password)
     .then((userCredential) => {
       const userCr = userCredential.user;
@@ -78,7 +78,7 @@ function saveToDatabasae(user) {
       const docRef = doc(db, "users", userCr.uid);
       setDoc(docRef, userData)
         .then(() => {
-          window.location.href = "../Index.html";
+          window.location.href = "../index.html";
         })
         .catch((error) => {
           console.error(error);
@@ -120,10 +120,10 @@ async function loginFromDatabase(email, password) {
       localStorage.setItem("loggedInUserId", user.uid);
       console.log(user.uid);
       console.log(user);
-      if (window.location.pathname != "/Index.html") {
+      if (window.location.pathname != "/index.html") {
         console.log("Not In Home Page");
         //go To Home Page
-        window.location.href = "../Index.html";
+        window.location.href = "../index.html";
       } else {
         //If Already in Home Page;
       }

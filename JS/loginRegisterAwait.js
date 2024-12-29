@@ -183,7 +183,7 @@ async function saveToDatabasae(user) {
         showingAlert(4, "Success: ", "Saved User Data to Database");
         // Fetching user again from Database
         await fetchUserData(userCr.uid);
-        window.location.href = "../Index.html";
+        window.location.href = "../index.html";
       } catch (error) {
         console.log("Error in Saving the user Data in Database");
         /********* Show Error Alert ************/
@@ -283,10 +283,10 @@ async function loginFromDatabase(email, password) {
       showingAlert(4, "Success: ", "Got All User Data !");
       console.log(user.uid);
       console.log(user);
-      if (window.location.pathname != "/Index.html") {
+      if (window.location.pathname != "/index.html") {
         console.log("Not In Home Page");
         //go To Home Page
-        window.location.href = "../Index.html";
+        window.location.href = "../index.html";
       } else {
         //If Already in Home Page;
       }
