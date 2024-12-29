@@ -55,6 +55,26 @@ export function Product(
   this.objectFeedback = objectFeedback;
 }
 
+export function FullProduct(
+  id = "",
+  name = "",
+  price = 0,
+  description = "",
+  imageUrl = "",
+  category = null,
+  quantity = 0,
+  objectFeedback = {}
+) {
+  this.id = id;
+  this.name = name;
+  this.price = price;
+  this.description = description;
+  this.imageUrl = imageUrl;
+  this.category = category;
+  this.quantity = quantity;
+  this.objectFeedback = objectFeedback;
+}
+
 export function ProductPlainObject(
   name = "",
   price = 0,
@@ -65,6 +85,28 @@ export function ProductPlainObject(
   objectFeedback = {}
 ) {
   return {
+    name: name,
+    price: price,
+    description: description,
+    imageUrl: imageUrl,
+    category: category,
+    quantity: quantity,
+    objectFeedback: objectFeedback,
+  };
+}
+
+export function FullProductPlainObject(
+  id = "",
+  name = "",
+  price = 0,
+  description = "",
+  imageUrl = "",
+  category = null,
+  quantity = 0,
+  objectFeedback = {}
+) {
+  return {
+    id: id,
     name: name,
     price: price,
     description: description,

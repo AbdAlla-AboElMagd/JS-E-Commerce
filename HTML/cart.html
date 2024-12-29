@@ -19,21 +19,19 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <!-- Bootstrap -->
+    <link
+      href="../Resources/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="../Resources/Bootstrap//bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../JS/scriptCart.js"></script>
     <title>Cart</title>
   </head>
   <body>
     <div class="big_container">
       <div class="area">
         <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
           <li></li>
         </ul>
       </div>
@@ -43,26 +41,30 @@
           <div class="cart-table"></div>
           <div class="cart_info">
             <img
-              src="../Resources/Images/cart.jpg"
+              src="../Resources/Images/cart.jpeg"
               alt="Cart Image"
               class="cart-image"
+              style="width: 100px; height: 100px"
             />
             <div class="cart-total">
+              <div id="productsList"></div>
               <h3>
                 Total Price:
                 <h3 id="total_price">$00.00</h3>
               </h3>
             </div>
             <div class="cart_buttons">
-              <a class="first_btn" href="index.html">Continue Shopping</a>
-              <a class="second_btn" href="#">Continue Buying</a>
+              <a class="first_btn" href="./ShowAllProducts.html"
+                >Continue Shopping</a
+              >
+              <a class="second_btn" href="#" id="btnBuy">Continue Buying</a>
             </div>
           </div>
         </div>
         <div class="success-message" id="success-message">
           <div class="message_container">
             <div class="border_message">
-              <img src="images/check-solid.svg" alt="Success" />
+              <!-- <img src="images/check-solid.svg" alt="Success" /> -->
             </div>
             <h3>We hope this is not your last purchase!</h3>
             <h3>Your Buying is successful!</h3>
@@ -71,7 +73,7 @@
       </div>
     </div>
 
-    <footer class="footer">
+    <!-- <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="footer-col">
@@ -113,9 +115,9 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
 
-    <script src="cart.js"></script>
+    <!-- <script src="cart.js"></script> -->
     <!-- <script src="js/file.js"></script> -->
   </body>
 </html>

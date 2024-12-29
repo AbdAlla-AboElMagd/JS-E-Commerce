@@ -8,6 +8,8 @@ import {
   promiseDeleteDataFromTable,
 } from "./promiseDealingWithFirestore.js";
 
+import { FullProduct, FullProductPlainObject } from "./eEommerceObjects.js";
+
 /*************************************************************/
 const productsFound = document.getElementById("productsFound");
 const textSearch = document.getElementById("textSearch");
@@ -35,7 +37,8 @@ function showAllProducts() {
           stockQuantity,
           rate,
           productID,
-          objectFeedback;
+          objectFeedback,
+          category;
 
         if (data[id].name && data[id].name != "0") {
           title = data[id].name;
@@ -71,6 +74,11 @@ function showAllProducts() {
         } else {
           rate = 0;
         }
+        if (data[id].category && data[id].category != "") {
+          category = data[id].category;
+        } else {
+          category = "";
+        }
 
         let card = createProductCard(
           title,
@@ -79,7 +87,9 @@ function showAllProducts() {
           price,
           stockQuantity,
           rate,
-          id
+          id,
+          category,
+          objectFeedback
         );
         products.appendChild(card);
         //console.log(products);
@@ -101,7 +111,9 @@ function createProductCard(
   price,
   stockQuantity,
   rate,
-  productID
+  productID,
+  category,
+  objectFeedback = null
 ) {
   // Create the card containerconst
   let card = document.createElement("div");
@@ -113,6 +125,7 @@ function createProductCard(
   card.style.textAlign = "center";
   card.style.backgroundColor = "#fff";
   card.style.transition = "transform 0.2s";
+  card.style.position = "relative";
   // Create the card contentconst
   let image = document.createElement("img");
   image.src = imageUrl;
@@ -141,6 +154,52 @@ function createProductCard(
   idElement.style.fontSize = "12px";
   idElement.style.color = "#777";
   idElement.style.margin = "4px 0";
+  idElement.style.marginBottom = "40px";
+
+  /**************************/
+  let button = document.createElement("button");
+  button.textContent = "Add to Cart";
+  button.style.width = "95%";
+  button.style.height = "40px";
+  button.style.border = "none";
+  button.style.borderRadius = "4px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.cursor = "pointer";
+  button.style.padding = "8px";
+  button.style.fontWeight = "bold";
+  button.style.transition = "background-color 0.2s";
+  button.style.margin = "8px 0";
+  button.style.position = "absolute";
+  button.style.bottom = "8px";
+  button.style.right = "8px";
+
+  let cardProduct = FullProductPlainObject(
+    productID,
+    title,
+    price,
+    description,
+    imageUrl,
+    category,
+    stockQuantity,
+    objectFeedback
+  );
+
+  button.onclick = function () {
+    // Add the product to the cart
+    let savedCart = localStorage.getItem("cart");
+    if (savedCart && savedCart != null && savedCart != "") {
+      let products = JSON.parse(savedCart);
+      products.push(cardProduct);
+      localStorage.setItem("cart", JSON.stringify(products));
+    } else {
+      let products = [];
+      products.push(cardProduct);
+      localStorage.setItem("cart", JSON.stringify(products));
+    }
+  };
+  /************************/
+
   // Add hover effect
   card.addEventListener("mouseenter", () => {
     card.style.transform = "scale(1.05)";
@@ -148,6 +207,7 @@ function createProductCard(
   card.addEventListener("mouseleave", () => {
     card.style.transform = "scale(1)";
   });
+
   // Append elements to the card
   card.appendChild(image);
   card.appendChild(header);
@@ -156,6 +216,7 @@ function createProductCard(
   card.appendChild(stockElement);
   card.appendChild(rateElement);
   card.appendChild(idElement);
+  card.appendChild(button);
   //   console.log(card);
   return card;
 }
