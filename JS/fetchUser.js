@@ -97,9 +97,12 @@ function updateLoginSignoutBtn(isLogedIn, userData) {
       userName.innerText = "";
       loginSignoutBtn.innerText = "Login";
       loginSignoutBtn.onclick = () => {
-        window.location.href = "./HTML/login.html";
+        if (window.location.href.includes("admin")) {
+          window.location.href = "../HTML/login.html";
+        } else {
+          window.location.href = "./HTML/login.html";
+        }
       };
     }
   }
 }
-
