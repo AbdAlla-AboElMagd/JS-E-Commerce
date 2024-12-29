@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="../Resources/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="../Resources/Bootstrap//bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../JS/showAllProducts.js"></script>
+    <script type="module" src="../JS/fetchUser.js"></script>
+    <script type="module" src="../JS/search.js"></script>
+    <title>Products</title>
+  </head>
+  <body>
+    <!--***********************************************************************************************************-->
+    <!-- Navbar -->
+    <div
+      class="navbar navbar-expand-md navbar-dark bg-dark mb-4"
+      role="navigation"
+    >
+      <a class="navbar-brand" href="../Index.html">Dream</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul
+          class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+          style="--bs-scroll-height: 100px"
+        >
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../Index.html"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              href="https://github.com/AbdAlla-AboElMagd/JS-E-Commerce"
+              target="_blank"
+              >Github</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="./ShowAllProducts.html"
+              >Show All Products</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="./showAllCategories.html"
+              >Show All Categories</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="./about.html" target="_blank"
+              >About</a
+            >
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Action
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item"
+                  id="btnShowProducts"
+                  href="./admin/productControl.html"
+                  >Control Products</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="./admin/categoryControl.html"
+                  >Control Categories</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Link</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <!-- Handling Search Product -->
+          <input
+            list="productsFound"
+            id="textSearch"
+            name="textSearch"
+            class="form-control me-2"
+            aria-label="Search"
+          />
+          <datalist id="productsFound"></datalist>
+
+          <button id="btnSearch" class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
+        <div id="loginSignout" class="text-white-50 p-2">
+          <span>Hello, <span id="userName"></span></span>
+          <a
+            class="active"
+            aria-current="page"
+            href="./login.html"
+            id="loginSignoutBtn"
+            >Login</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--************************************************************************************************************-->
+    <div
+      class=""
+      id="products"
+      style="
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      "
+    ></div>
+  </body>
+</html>

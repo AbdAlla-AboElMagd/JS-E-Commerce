@@ -102,3 +102,4 @@ function updateLoginSignoutBtn(isLogedIn, userData) {
     }
   }
 }
+
