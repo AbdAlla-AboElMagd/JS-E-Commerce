@@ -43,7 +43,7 @@ function getPreviousOrderedFromFirestore() {
 
           // Create reject button
           let rejectButton = document.createElement("button");
-          rejectButton.textContent = "Return";
+          rejectButton.textContent = "Reject";
           rejectButton.setAttribute("class", "btn btn-danger");
 
           if (product.status == 0 || product.status == 1) {
