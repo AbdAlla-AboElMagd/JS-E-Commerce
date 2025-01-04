@@ -46,7 +46,6 @@ function getPreviousOrderedFromFirestore() {
           let price = document.createElement("td");
           let status = document.createElement("td");
           let action = document.createElement("td");
-          console.log("Siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
           console.log(product);
           orderID.textContent = product;
           productName.textContent = product.name;

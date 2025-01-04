@@ -59,9 +59,9 @@ function getPreviousOrderedFromFirestore() {
             });
           });
 
-          // Create reject button
+          // Create Approve button
           let aproveButton = document.createElement("button");
-          aproveButton.textContent = "Return";
+          aproveButton.textContent = "Approve";
           aproveButton.setAttribute("class", "btn btn-success");
 
           if (
