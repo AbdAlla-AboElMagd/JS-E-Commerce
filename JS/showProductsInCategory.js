@@ -23,41 +23,84 @@ function deleteAllChilds(parent) {
 }
 /***************************************************** */
 function getAllProducts(categoryId) {
-  return promiseGetDataWithKeyValue("categories", "categoryParent", categoryId);
+  return promiseGetDataWithKeyValue("products", "category", categoryId);
 }
 function getAllRelatedCategories(categoryId) {
   return promiseGetDataWithKeyValue("categories", "categoryParent", categoryId);
 }
 
-// async function getAllCateforiesChildsFromCategory(categoryId) {
-//   let listOFCategories = [];
-//   listOFCategories.push(categoryId);
-//   console.log(listOFCategories);
+/************************** Getting All Childs Categories ****************************/
+function getAllCategoriesAndChildIndices(
+  categoryId,
+  processedCategories = new Set()
+) {
+  let categoryIndices = [];
+  if (!processedCategories.has(categoryId)) {
+    processedCategories.add(categoryId);
+    categoryIndices.push(categoryId);
+  }
 
-//   try {
-//     const data = await getAllRelatedCategories(categoryId);
-//     console.log(`This Is dataaaaaaaaaaaaaaaaaaaa: ${data}`);
-//     for (let id of data) {
-//       console.log(`This Is Iddddddddddddddddddddddddddddd: ${id}`);
-//       console.log("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-//       listOFCategories.push(id);
-//     }
-//     console.log(listOFCategories);
-//   } catch (e) {
-//     console.error("Error In Getting Data");
-//     console.error(e);
-//   }
+  return getAllRelatedCategories(categoryId)
+    .then((data) => {
+      if (!data || Object.keys(data).length === 0) {
+        return categoryIndices;
+      }
 
-//   return listOFCategories;
+      let promises = [];
+      for (let id in data) {
+        if (!processedCategories.has(id)) {
+          processedCategories.add(id);
+          categoryIndices.push(id);
+          promises.push(
+            getAllCategoriesAndChildIndices(id, processedCategories).then(
+              (childIndices) => {
+                categoryIndices = categoryIndices.concat(childIndices);
+              }
+            )
+          );
+        }
+      }
+
+      return Promise.all(promises).then(() => categoryIndices);
+    })
+    .catch((e) => {
+      console.error("Error In Getting Data:", e);
+      throw e;
+    });
+}
+
+// function getAllProductsFromCateforyAndRelatedCategories(categoryId) {
+//   getAllRelatedCategories(categoryId)
+//     .then((data) => {
+//       console.log(`This Is dataaaaaaaaaaaaaaaaaaaa:`);
+//       console.log(data);
+//       console.log("First Product In Main Category");
+//       showAllProducts(categoryId);
+//       console.log("Products In Child Categories");
+//       for (let id in data) {
+//         console.log(id);
+//         showAllProducts(id);
+//         console.log(`This Is Iddddddddddddddddddddddddddddd: ${id}`);
+//       }
+//     })
+//     .catch((e) => {
+//       console.error("Error In Getting Data");
+//       console.error(e);
+//       throw e;
+//     });
 // }
 
-// console.log(getAllCateforiesChildsFromCategory("IdggSogtrvB9LMusyIjL"));
+// console.log("Siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
 
-// getAllCateforiesChildsFromCategory("IdggSogtrvB9LMusyIjL");
+// // getAllProductsFromCateforyAndRelatedCategories("vuuL4WEZxKmjB2x0Ro8N");
+// getAllProductsFromCateforyAndRelatedCategories("4AArt8TcwsFIiPlrhYAb");
 
+/********************* Handling Showing Products ******************************/
 function showAllProducts(categoryId) {
   getAllProducts(categoryId)
     .then((data) => {
+      console.log("This Is Data In Show All Products");
+      console.log(data);
       for (let id in data) {
         let title,
           imageUrl,
@@ -68,8 +111,6 @@ function showAllProducts(categoryId) {
           productID,
           objectFeedback,
           category;
-        console.log(`Idddddddddddddddddddddddddddddddddd:${id}`);
-        console.log(id);
         if (data[id].name && data[id].name != "0") {
           title = data[id].name;
         }
@@ -255,5 +296,47 @@ function createProductCard(
 
 /***************************************************** */
 
+/*************************** Getting Final Product For All Categories *******************************/
+function getProductsByCategories(categoryId) {
+  getAllCategoriesAndChildIndices(categoryId)
+    .then((data) => {
+      console.log(data);
+      for (let id of data) {
+        console.log(id);
+        showAllProducts(id);
+      }
+    })
+    .catch((e) => {
+      console.error("Error In Getting Data");
+      console.error(e);
+      throw e;
+    });
+}
+
+/************************ Getting The Category Id From The link ***********************************/
+function getCategoryIdFromUrl() {
+  // Get the current page URL
+  const url = window.location.href;
+
+  // Create a URL object
+  const currentUrl = new URL(url);
+
+  // Extract the value of the "categoryId" query parameter
+  const categoryId = currentUrl.searchParams.get("categoryId");
+
+  // Return the category ID
+  return categoryId;
+}
+
+const categoryId = getCategoryIdFromUrl();
+console.log("Category ID:", categoryId);
+
+/********************** Run the Functions ********************/
+getProductsByCategories(categoryId);
+
+// getProductsByCategories("4AArt8TcwsFIiPlrhYAb");
+
 /********************************** */
-showAllProducts("0XQD4nO65JbQl6lKFmQd");
+// showAllProducts("mlMwa5Vfgu3jLLWmWCXJ");
+
+// getAllRelatedCategories("mlMwa5Vfgu3jLLWmWCXJ");

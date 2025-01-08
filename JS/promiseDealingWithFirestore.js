@@ -140,9 +140,11 @@ export function promiseGetDataWithKeyValue(tableName, Objectkey, ObjectValue) {
         //console.log(querySnapshot);
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
+          //console.log(doc.id, " => ", doc.data());
           data[doc.id] = doc.data();
         });
+        // console.log(`Finshing Loading Data: ${data}`);
+        // console.log(data);
         resolve(data);
       })
       .catch((error) => {
